@@ -103,7 +103,7 @@ function home() {
         <div class="mt-3 h-[2px] w-40 bg-accent/60 rounded animate-softpulse"></div>
       </div>
       <div class="flex md:justify-end">
-        <img src="/static/profile.png" alt="Foto ${SITE.name}"
+        <img src="/static/foto.png" alt="Foto ${SITE.name}"
              class="w-40 h-40 rounded-full object-cover ring-2 ring-accent shadow-xl animate-floaty">
       </div>
     </header>

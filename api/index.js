@@ -1,29 +1,26 @@
-// api/index.js
-module.exports = (req, res) => {
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "text/html; charset=utf-8");
-  res.end(`
-    <!doctype html>
-    <html>
-    <head>
-      <title>Fadhil Portfolio</title>
-      <style>
-        body { font-family:sans-serif; background:#0b0f1a; color:white; padding:2rem; }
-        h1 { color:#34d399; }
-        a { color:#34d399; }
-      </style>
-    </head>
-    <body>
-      <h1>Hello, I'm Fadhil 👋</h1>
-      <p>AI & DevOps Enthusiast</p>
-      <h2>Projects</h2>
-      <ul>
-        <li>NutriIoTSpoon – IoT spoon calorie detection</li>
-        <li>Planogram Compliance – Ajinomoto CV</li>
-        <li>HR GenAI Chatbot – Bedrock & SQL Agent</li>
-      </ul>
-      <p>📩 <a href="mailto:primafadhil.sulistyo@gmail.com">Contact Me</a></p>
-    </body>
-    </html>
-  `);
-};
+// ...
+res.end(`
+  <!doctype html>
+  <html>
+  <head>
+    <title>Fadhil Portfolio</title>
+    <style>
+      body { font-family:sans-serif; background:#0b0f1a; color:white; padding:2rem; }
+      h1 { color:#34d399; }
+      img.avatar { width:140px; height:140px; border-radius:50%; object-fit:cover; border:2px solid #34d399; }
+      .row { display:flex; gap:24px; align-items:center; flex-wrap:wrap; }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <img class="avatar" src="/static/profile.jpg" alt="Foto Fadhil" loading="lazy" />
+      <div>
+        <h1>Hello, I'm Fadhil 👋</h1>
+        <p>AI & DevOps Enthusiast</p>
+      </div>
+    </div>
+    <!-- sisanya... -->
+  </body>
+  </html>
+`);
+// ...

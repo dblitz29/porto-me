@@ -28,17 +28,31 @@ const GALLERY = [
 
 const SKILLS = {
   "AI / ML": [
-    "LLMs", "Computer Vision", "Generative AI", "NLP", "MLOps"
+    "Large Language Models (LLMs)",
+    "Generative AI (OpenAI, Bedrock)",
+    "Computer Vision (YOLO, OpenCV)",
+    "Natural Language Processing (NLP)",
+    "Embeddings & Vector Databases (Faiss, pgvector, Milvus)",
+    "Text-to-SQL & RAG Pipelines",
+    "Model Deployment & MLOps (SageMaker, CI/CD)"
   ],
   "Software Development": [
-    "Python", "Node.js", "FastAPI", "PostgreSQL", "REST APIs"
+    "Python", "Node.js", "PHP", "FastAPI", "PostgreSQL",
+    "MongoDB", "REST APIs", "JavaScript/TypeScript"
   ],
   "Cloud / DevOps": [
-    "AWS Bedrock", "SageMaker", "EKS/Kubernetes", "Docker",
-    "OpenStack", "Ansible", "AWS Lambda", "API Gateway",
-    "CloudWatch", "RDS", "S3"
+    "AWS (Bedrock, SageMaker, Lambda, EKS, S3, RDS)",
+    "OpenStack", "Docker", "Kubernetes",
+    "Ansible", "CloudWatch", "CI/CD Pipelines"
+  ],
+  "Data & Tools": [
+    "ETL & Data Warehousing",
+    "Data Lakes & DWH tools",
+    "Grafana & Observability",
+    "Apache Spark & Hadoop"
   ]
 };
+
 
 const PROJECTS = [
   {

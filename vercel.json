@@ -4,8 +4,8 @@
     { "src": "api/index.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/static/(.*)", "dest": "/static/$1" },
-    { "src": "/favicon.ico", "dest": "/static/favicon.ico" },
+    { "src": "/static/(.*)", "dest": "static/$1" },
+    { "src": "/favicon.ico", "dest": "static/favicon.ico" },
     { "src": "/(.*)", "dest": "api/index.js" }
   ]
 }

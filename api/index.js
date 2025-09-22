@@ -1,208 +1,142 @@
-// Portfolio Node.js stylish + minimal untuk Vercel
-// Jalur: /, /about, /projects, /contact
+// api/index.js
 const SITE = {
-  title: "Fadhil — AI/DevOps",
   name: "Primafadhil Sulistyo",
   email: "primafadhil.sulistyo@gmail.com",
-  waLink: "https://wa.me/6281228729513",
+  wa: "https://wa.me/6281228729513",
   github: "https://github.com/yourusername",
   linkedin: "https://www.linkedin.com/in/yourusername",
-  baseUrl: "https://your-vercel-url.vercel.app" // ganti setelah deploy
+  title: "Fadhil — AI/DevOps"
 };
 
-const PROJECTS = [
-  {
-    title: "NutriIoTSpoon",
-    desc: "IoT spoon calorie detection (YOLO) + mobile app.",
-    tags: ["IoT", "Computer Vision", "YOLO"]
-  },
-  {
-    title: "Planogram Compliance",
-    desc: "Object detection & classification SKU display (Ajinomoto).",
-    tags: ["SageMaker", "Bedrock", "CV"]
-  },
-  {
-    title: "HR GenAI Chatbot",
-    desc: "Text-to-SQL + RAG untuk HR analytics multi-channel.",
-    tags: ["Bedrock", "pgvector", "RAG"]
-  }
+const projects = [
+  { title: "NutriIoTSpoon", desc: "IoT spoon calorie detection (YOLO) + mobile app.", tags: ["IoT","CV","YOLO"] },
+  { title: "Planogram Compliance", desc: "Object detection & classification SKU display (Ajinomoto).", tags: ["SageMaker","Bedrock","CV"] },
+  { title: "HR GenAI Chatbot", desc: "Text-to-SQL + RAG untuk HR analytics multi-channel.", tags: ["Bedrock","pgvector","RAG"] },
 ];
 
-function baseHtml({ title, body, description = "Portfolio AI/DevOps — warm gradient, minimal, responsif." }) {
+function page(body, title = SITE.title) {
   return `<!doctype html>
 <html lang="id">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>${title}</title>
-  <meta name="description" content="${escapeHtml(description)}" />
-  <meta name="theme-color" content="#0e1527" />
-  <link rel="icon" href="/static/favicon.ico" />
-  <link rel="preload" as="image" href="/static/profile.webp" />
-  <link rel="stylesheet" href="/static/style.css" />
-  <meta property="og:title" content="${title}" />
-  <meta property="og:description" content="${escapeHtml(description)}" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="${SITE.baseUrl}/static/profile.webp" />
-  <script type="application/ld+json">
-  ${JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: SITE.name,
-    url: SITE.baseUrl,
-    email: `mailto:${SITE.email}`,
-    sameAs: [SITE.github, SITE.linkedin]
-  })}
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { base: "#0b0f1a", panel: "#0c1324", accent: "#34d399" },
+        }
+      }
+    }
   </script>
 </head>
-<body>
-  <div class="nav">
-    <div class="container navin">
-      <a class="brand" href="/">fadhil.dev</a>
-      <nav class="tabs">
-        <a href="/about">About</a>
-        <a href="/projects">Projects</a>
-        <a href="/contact">Contact</a>
-      </nav>
+<body class="min-h-screen text-zinc-100 bg-gradient-to-b from-base via-panel to-base">
+  <nav class="sticky top-0 z-20 backdrop-blur bg-black/20 border-b border-white/10">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="/" class="font-semibold">fadhil.dev</a>
+      <div class="flex gap-4 text-sm">
+        <a href="/about" class="opacity-80 hover:opacity-100">About</a>
+        <a href="/projects" class="opacity-80 hover:opacity-100">Projects</a>
+        <a href="/contact" class="opacity-80 hover:opacity-100">Contact</a>
+      </div>
     </div>
-  </div>
+  </nav>
 
-  <main class="container">
-    ${body}
-    <footer class="footer">
-      © ${new Date().getFullYear()} fadhil.dev — Node.js on Vercel
-    </footer>
+  <main class="max-w-6xl mx-auto px-4">${body}
+    <footer class="py-12 text-sm text-zinc-400">© ${new Date().getFullYear()} fadhil.dev — Node.js on Vercel</footer>
   </main>
-
-  <script>
-    // Filter project by tag (client-side, kecil saja)
-    (function(){
-      const filterBar = document.querySelector('[data-filterbar]');
-      if (!filterBar) return;
-      const cards = Array.from(document.querySelectorAll('[data-card]'));
-      filterBar.addEventListener('click', (e) => {
-        const btn = e.target.closest('button');
-        if (!btn) return;
-        const tag = btn.dataset.tag;
-        document.querySelectorAll('[data-filterbar] button').forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
-        cards.forEach(c=>{
-          const tags = (c.dataset.tags || '').split(',');
-          c.style.display = (tag==='All'||tags.includes(tag)) ? '' : 'none';
-        });
-      });
-    })();
-  </script>
 </body>
 </html>`;
 }
 
 function home() {
-  const tags = Array.from(new Set(PROJECTS.flatMap(p => p.tags)));
-  const cards = PROJECTS.map(p => `
-    <article class="card" data-card data-tags="${p.tags.join(',')}">
-      <h3>${p.title}</h3>
-      <p class="muted">${p.desc}</p>
-      <div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
-    </article>
+  const cards = projects.map(p => `
+    <a class="group rounded-2xl border border-white/10 hover:border-white/20 p-5 bg-white/5 transition-colors"
+       href="#">
+      <h3 class="text-lg font-semibold group-hover:text-accent">${p.title}</h3>
+      <p class="mt-2 text-sm text-zinc-300">${p.desc}</p>
+      <div class="mt-3 flex flex-wrap gap-2">
+        ${p.tags.map(t=>`<span class="text-xs px-2 py-1 rounded-full border border-white/10">${t}</span>`).join("")}
+      </div>
+    </a>
   `).join("");
 
-  const body = `
-  <header class="hero">
-    <div class="hero-left">
-      <p class="eyebrow">Greetings!</p>
-      <h1>Saya passionate di <span class="accent">AI & DevOps</span> — let's dive in!</h1>
-      <p class="lead">Fokus di ML/LLM, Computer Vision, & AWS (Bedrock, SageMaker, EKS). 
-         Senang membangun solusi end-to-end: data → model → deploy → observability.</p>
-      <div class="btns">
-        <a class="btn primary" href="/projects">Explore Projects</a>
-        <a class="btn" href="/contact">Contact Me</a>
+  return page(`
+    <header class="pt-16 pb-10 grid md:grid-cols-[1.2fr_.8fr] items-center gap-8">
+      <div>
+        <p class="text-sm uppercase tracking-widest text-emerald-300/90">Greetings!</p>
+        <h1 class="mt-2 text-4xl sm:text-6xl font-bold leading-tight">
+          I’m passionate about <span class="text-accent">AI & DevOps</span> — let’s dive in!
+        </h1>
+        <p class="mt-4 max-w-3xl text-zinc-300">
+          Fokus ML/LLM, Computer Vision, & AWS (Bedrock, SageMaker, EKS). End-to-end delivery dari data → model → deploy.
+        </p>
+        <div class="mt-6 flex gap-3">
+          <a href="/projects" class="px-4 py-2 rounded-2xl bg-accent text-black font-semibold">Explore Projects</a>
+          <a href="/contact" class="px-4 py-2 rounded-2xl border border-white/20">Contact Me</a>
+        </div>
       </div>
-    </div>
-    <div class="hero-right">
-      <img class="avatar" src="/static/profile.webp" alt="Foto ${escapeHtml(SITE.name)}" loading="eager" />
-    </div>
-  </header>
-
-  <section class="section">
-    <div class="section-head">
-      <h2>Selected Projects</h2>
-      <div class="filter" data-filterbar>
-        <button class="chip active" data-tag="All">All</button>
-        ${tags.map(t=>`<button class="chip" data-tag="${t}">${t}</button>`).join("")}
+      <div class="flex md:justify-end">
+        <img src="/static/profile.png" alt="Foto ${SITE.name}"
+             class="w-40 h-40 rounded-full object-cover ring-2 ring-accent shadow-xl">
       </div>
-    </div>
-    <div class="grid">${cards}</div>
-  </section>
-  `;
+    </header>
 
-  return baseHtml({ title: `${SITE.title}`, body });
+    <section class="py-12">
+      <h2 class="text-2xl font-semibold">Selected Projects</h2>
+      <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">${cards}</div>
+    </section>
+  `);
 }
 
 function about() {
-  const body = `
-  <section class="section">
-    <h2>About</h2>
-    <p class="muted">Saya cheerful & friendly; suka K-pop, gaming, dan eksplor teknologi.
-      Passion di AI/ML (CV, NLP, LLM) & DevOps cloud (AWS). 
-      Highlight: Planogram CV (Ajinomoto), HR GenAI Chatbot (SQL + RAG), MLOps di AWS.</p>
-  </section>
-  `;
-  return baseHtml({ title: `About — ${SITE.title}`, body });
+  return page(`
+    <section class="py-12">
+      <h2 class="text-2xl font-semibold">About</h2>
+      <p class="mt-3 text-zinc-300 leading-relaxed">
+        Saya cheerful & friendly; suka K-pop, gaming, dan eksplor teknologi.
+        Highlight: Planogram CV (Ajinomoto), HR GenAI Chatbot, MLOps di AWS.
+      </p>
+    </section>
+  `, "About — " + SITE.title);
 }
 
-function projects() {
-  const cards = PROJECTS.map(p => `
-    <article class="card">
-      <h3>${p.title}</h3>
-      <p class="muted">${p.desc}</p>
-      <div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
-    </article>
-  `).join("");
-  const body = `
-  <section class="section">
-    <h2>Projects</h2>
-    <div class="grid">${cards}</div>
-  </section>`;
-  return baseHtml({ title: `Projects — ${SITE.title}`, body });
+function projectsPage() {
+  return page(`
+    <section class="py-12">
+      <h2 class="text-2xl font-semibold">Projects</h2>
+      <ul class="mt-4 list-disc pl-6 text-zinc-300">
+        ${projects.map(p=>`<li><span class="font-semibold">${p.title}</span> — ${p.desc}</li>`).join("")}
+      </ul>
+    </section>
+  `, "Projects — " + SITE.title);
 }
 
 function contact() {
-  const body = `
-  <section class="section">
-    <h2>Contact</h2>
-    <div class="contact">
-      <p>Email: <a href="mailto:${SITE.email}">${SITE.email}</a></p>
-      <p>WhatsApp: <a href="${SITE.waLink}">+62 812-2872-9513</a></p>
-      <p>GitHub: <a href="${SITE.github}">${SITE.github}</a></p>
-      <p>LinkedIn: <a href="${SITE.linkedin}">${SITE.linkedin}</a></p>
-    </div>
-  </section>`;
-  return baseHtml({ title: `Contact — ${SITE.title}`, body });
+  return page(`
+    <section class="py-12">
+      <h2 class="text-2xl font-semibold">Contact</h2>
+      <div class="mt-3 text-zinc-300 space-y-1">
+        <p>Email: <a class="underline" href="mailto:${SITE.email}">${SITE.email}</a></p>
+        <p>WhatsApp: <a class="underline" href="${SITE.wa}">+62 812-2872-9513</a></p>
+        <p>GitHub: <a class="underline" href="${SITE.github}">${SITE.github}</a></p>
+        <p>LinkedIn: <a class="underline" href="${SITE.linkedin}">${SITE.linkedin}</a></p>
+      </div>
+    </section>
+  `, "Contact — " + SITE.title);
 }
 
-function notFound() {
-  const body = `
-  <section class="section">
-    <h2>404</h2>
-    <p class="muted">Halaman tidak ditemukan.</p>
-    <div class="btns"><a class="btn" href="/">Kembali ke Home</a></div>
-  </section>`;
-  return baseHtml({ title: `404 — ${SITE.title}`, body });
-}
-
-// util kecil
-function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[m])); }
-
-// Handler Vercel
 module.exports = (req, res) => {
   const path = (req.url || "/").split("?")[0];
-  let html;
-  if (path === "/" || path === "/index.html") html = home();
-  else if (path === "/about") html = about();
-  else if (path === "/projects") html = projects();
-  else if (path === "/contact") html = contact();
-  else html = notFound();
+  let html =
+    path === "/" || path === "/index.html" ? home() :
+    path === "/about"    ? about() :
+    path === "/projects" ? projectsPage() :
+    path === "/contact"  ? contact() :
+    page(`<section class="py-12"><h2 class="text-2xl font-semibold">404</h2>
+          <p class="text-zinc-300">Halaman tidak ditemukan.</p></section>`, "404 — " + SITE.title);
 
   res.statusCode = html.includes("404 —") ? 404 : 200;
   res.setHeader("Content-Type", "text/html; charset=utf-8");

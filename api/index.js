@@ -1,4 +1,4 @@
-// api/index.js — Portfolio: Landing + Carousel (caption panjang) + Skills + Projects + Contact
+// api/index.js — Portfolio: Landing + Carousel (EN short captions) + Skills + Projects + Contact
 const SITE = {
   name: "Primafadhil Sulistyo",
   email: "primafadhil.sulistyo@gmail.com",
@@ -7,22 +7,22 @@ const SITE = {
   title: "Fadhil — AI/ML • Software • Cloud"
 };
 
-// Gambar berada di /static/gallery/*. Ganti sesuai nama file milikmu.
+// Gambar berada di /static/gallery/*. Ganti nama file sesuai asetmu.
 const GALLERY = [
   {
     src: "/static/gallery/iot.jpg",
     caption:
-      "Runner-up KMIPN IV kategori Internet of Things di Batam. Saya merancang perangkat dan model deteksi kalori berbasis visi komputer, lalu mengintegrasikannya dengan aplikasi pendamping agar hasil pengukuran bisa digunakan secara praktis."
+      "Runner-up at KMIPN IV (IoT), Batam. Built a calorie-detection spoon using computer vision with a companion app."
   },
   {
     src: "/static/gallery/aws-event.jpg",
     caption:
-      "Key speaker pada acara AWS Generative AI di Surabaya tahun 2025. Saya membahas rancangan sistem GenAI end-to-end di AWS, mencakup keamanan data, orchestrasi prompt, evaluasi, serta pola integrasi dengan aplikasi perusahaan."
+      "Key speaker at AWS Generative AI event, Surabaya 2025. Shared end-to-end GenAI patterns on AWS."
   },
   {
     src: "/static/gallery/datacenter.jpg",
     caption:
-      "Ikut membantu proses racking dan penataan server di lingkungan datacenter Datacomm. Pengalaman ini memperkuat pemahaman saya tentang operasi infrastruktur, kesiapan produksi, dan praktik keandalan sistem."
+      "Supported datacenter racking and server setup at Datacomm to strengthen production readiness."
   }
 ];
 
@@ -41,57 +41,61 @@ const SKILLS = {
 };
 
 const PROJECTS = [
-  // Judul lama (tetap)
-  { title: "IoT-Based Calorie Detection Spoon",
-    desc: "Perangkat sendok IoT dengan model deep learning untuk estimasi kalori, dilengkapi aplikasi pendamping. Runner-up KMIPN IV.",
-    tags: ["IoT","Deep Learning","Mobile"] },
-
-  // Judul menarik + deskripsi ringkas (AWS/OpenAI)
-  { title: "Retail Planogram Intelligence",
-    desc: "Sistem Computer Vision di AWS (SageMaker + Bedrock) untuk mendeteksi kepatuhan planogram, mengurangi kesalahan penataan rak dan meningkatkan eksekusi di toko.",
-    tags: ["Computer Vision","AWS","Retail"] },
-
-  { title: "Quality Control Automation",
-    desc: "Automasi inspeksi kualitas pada jalur manufaktur menggunakan S3, Lambda, dan SageMaker. Mendeteksi cacat secara konsisten dan mempercepat pengambilan keputusan.",
-    tags: ["Automation","AWS","Computer Vision"] },
-
-  { title: "Centralized Chatbot Platform",
-    desc: "Platform chatbot terpusat berbasis AWS dan OpenAI yang mengintegrasikan alur HR, Finance, dan IT. Mendukung RAG, kontrol akses, dan observabilitas percakapan.",
-    tags: ["Chatbot","AWS","OpenAI"] },
-
-  { title: "Generative Fashion Behavior AI",
-    desc: "Analitik preferensi dan perilaku fashion pengguna. Menggabungkan embedding, retrieval, dan generative reasoning di AWS Bedrock/OpenAI untuk rekomendasi yang kontekstual.",
-    tags: ["Generative AI","Fashion","OpenAI"] },
-
-  { title: "Insurance Claim Assistant",
-    desc: "Asisten klaim asuransi berbasis GenAI untuk membantu verifikasi dokumen dan merangkum informasi penting. Dibangun dengan Bedrock, Lambda, dan OpenAI API.",
-    tags: ["Insurance","AWS","OpenAI"] },
-
-  // Entri dari CV
-  { title: "Planogram Compliance (Ajinomoto)",
-    desc: "Pendeteksian objek dan klasifikasi kategori produk untuk audit rak. Pipeline model dan inferensi dikelola di AWS.",
-    tags: ["Computer Vision","AWS","Classification"] },
-
-  { title: "AI-Powered Customer Support Chatbot",
-    desc: "Chatbot kontekstual dengan Text-to-SQL dan RAG untuk akses data operasional secara aman.",
-    tags: ["Chatbot","NLP","RAG"] },
-
-  { title: "NusaChat (Public Gen AI Service)",
-    desc: "Layanan GenAI publik dengan pemrosesan gambar dan integrasi basis data, dirancang untuk skenario multi-tenant.",
-    tags: ["Generative AI","Cloud","Backend"] },
-
-  { title: "Freight Management System",
-    desc: "Aplikasi desktop dan mobile untuk pengelolaan logistik dengan integrasi pelacakan dan laporan operasional.",
-    tags: ["Full-stack","Logistics","Mobile"] },
-
-  { title: "CyberGuard",
-    desc: "Deteksi situs berbahaya berbasis machine learning dengan fokus pada fitur konten dan perilaku.",
-    tags: ["Cybersecurity","ML"] }
+  {
+    title: "IoT-Based Calorie Detection Spoon",
+    desc: "IoT spoon with deep-learning calorie estimation and a companion mobile app. Runner-up KMIPN IV.",
+    tags: ["IoT","Deep Learning","Mobile"]
+  },
+  {
+    title: "Retail Planogram Intelligence",
+    desc: "Computer Vision on AWS (SageMaker + Bedrock) to detect shelf compliance and improve in-store execution.",
+    tags: ["Computer Vision","AWS","Retail"]
+  },
+  {
+    title: "Quality Control Automation",
+    desc: "Automated defect detection in manufacturing using S3, Lambda, and SageMaker for consistent, faster QC.",
+    tags: ["Automation","AWS","Computer Vision"]
+  },
+  {
+    title: "Centralized Chatbot Platform",
+    desc: "Enterprise chatbot hub on AWS + OpenAI integrating HR/Finance/IT with RAG, access control, and observability.",
+    tags: ["Chatbot","AWS","OpenAI"]
+  },
+  {
+    title: "Generative Fashion Behavior AI",
+    desc: "Learns user style preferences and generates contextual insights via embeddings + GenAI on Bedrock/OpenAI.",
+    tags: ["Generative AI","Fashion","OpenAI"]
+  },
+  {
+    title: "Insurance Claim Assistant",
+    desc: "GenAI assistant for claim verification and document summarization using Bedrock, Lambda, and OpenAI API.",
+    tags: ["Insurance","AWS","OpenAI"]
+  },
+  {
+    title: "Planogram Compliance (Ajinomoto)",
+    desc: "Object detection and product classification; model pipeline and inference managed on AWS.",
+    tags: ["Computer Vision","AWS","Classification"]
+  },
+  {
+    title: "AI-Powered Customer Support Chatbot",
+    desc: "Context-aware chatbot with Text-to-SQL and RAG for secure operational data access.",
+    tags: ["Chatbot","NLP","RAG"]
+  },
+  {
+    title: "NusaChat (Public Gen AI Service)",
+    desc: "Public GenAI service with image processing and database integration, designed for multi-tenant scenarios.",
+    tags: ["Generative AI","Cloud","Backend"]
+  },
+  {
+    title: "Freight Management System",
+    desc: "Desktop and mobile apps for logistics operations with tracking and operational reporting.",
+    tags: ["Full-stack","Logistics","Mobile"]
+  }
 ];
 
 function page(body, title = SITE.title) {
   return `<!doctype html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -208,8 +212,7 @@ function SectionContact(){
         </a>
       </div>
       <p class="mt-6 text-sm text-zinc-400 max-w-2xl">
-        Terbuka untuk kolaborasi, konsultasi AI/ML, dan integrasi GenAI di lingkungan cloud.
-        Saya mengutamakan desain yang dapat dioperasikan, terukur, dan aman.
+        Open for collaboration, AI/ML consulting, and GenAI integrations in cloud environments with a focus on reliability and scalability.
       </p>
     </section>
   `;
@@ -230,25 +233,26 @@ function home(){
       <div>
         <p class="text-sm uppercase tracking-widest text-emerald-300/90">Hi, I’m Fadhil</p>
         <h1 class="mt-2 text-4xl sm:text-6xl font-bold leading-tight">
-          AI/ML Engineer yang fokus membangun sistem cerdas dari data hingga produksi.
+          AI/ML Engineer focused on taking intelligent systems from data to production.
         </h1>
         <p class="mt-4 max-w-3xl text-zinc-300">
-          Latar belakang Software Development dan Cloud/DevOps membantu saya menjembatani algoritma, aplikasi, dan infrastruktur
-          agar solusi AI dapat dioperasikan secara andal dan terukur.
+          My background in Software Development and Cloud/DevOps bridges algorithms, applications, and infrastructure
+          to deliver reliable, scalable AI solutions.
         </p>
       </div>
       <div class="flex md:justify-end">
-        <img src="/static/profile.png" alt="Foto ${SITE.name}"
+        <img src="/static/profile.png" alt="Photo of ${SITE.name}"
              class="w-44 h-44 rounded-full object-cover ring-2 ring-accent shadow-xl animate-floaty">
       </div>
     </header>
 
     <!-- CAROUSEL -->
-    <section class="pb-10 animate-fadeup">
-      <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+    <section class="pb-4 animate-fadeup">
+      <div class="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
         <div id="carousel-track" class="flex transition-transform duration-700 ease-out">${slides}</div>
-        <div class="absolute inset-x-0 bottom-3 flex justify-center gap-2">${dots}</div>
       </div>
+      <!-- Dots moved BELOW the carousel to avoid overlapping the caption -->
+      <div class="mt-3 flex justify-center gap-2">${dots}</div>
     </section>
 
     ${SectionSkills()}

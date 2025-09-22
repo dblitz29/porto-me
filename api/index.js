@@ -1,33 +1,92 @@
-// api/index.js — Portfolio based on CV
+// api/index.js — Portfolio: Landing + Carousel (caption panjang) + Skills + Projects + Contact
 const SITE = {
   name: "Primafadhil Sulistyo",
   email: "primafadhil.sulistyo@gmail.com",
-  wa: "https://wa.me/6281228729513",
   github: "https://github.com/dblitz29",
   linkedin: "https://www.linkedin.com/in/primafadhil-sulistyo/",
   title: "Fadhil — AI/ML • Software • Cloud"
 };
 
+// Gambar berada di /static/gallery/*. Ganti sesuai nama file milikmu.
 const GALLERY = [
-  "/static/gallery/iot.jpg",
-  "/static/gallery/award.jpg",
-  "/static/gallery/workshop.jpg",
-  "/static/gallery/project.jpg"
+  {
+    src: "/static/gallery/iot.jpg",
+    caption:
+      "Runner-up KMIPN IV kategori Internet of Things di Batam. Saya merancang perangkat dan model deteksi kalori berbasis visi komputer, lalu mengintegrasikannya dengan aplikasi pendamping agar hasil pengukuran bisa digunakan secara praktis."
+  },
+  {
+    src: "/static/gallery/aws-event.jpg",
+    caption:
+      "Key speaker pada acara AWS Generative AI di Surabaya tahun 2025. Saya membahas rancangan sistem GenAI end-to-end di AWS, mencakup keamanan data, orchestrasi prompt, evaluasi, serta pola integrasi dengan aplikasi perusahaan."
+  },
+  {
+    src: "/static/gallery/datacenter.jpg",
+    caption:
+      "Ikut membantu proses racking dan penataan server di lingkungan datacenter Datacomm. Pengalaman ini memperkuat pemahaman saya tentang operasi infrastruktur, kesiapan produksi, dan praktik keandalan sistem."
+  }
 ];
 
 const SKILLS = {
-  "AI / ML": ["LLMs", "Computer Vision", "Generative AI", "NLP", "MLOps"],
-  "Software Development": ["Python", "Node.js", "FastAPI", "PostgreSQL", "REST APIs"],
-  "Cloud / DevOps": ["AWS Bedrock", "SageMaker", "EKS/K8s", "Docker", "OpenStack", "Ansible"]
+  "AI / ML": [
+    "LLMs", "Computer Vision", "Generative AI", "NLP", "MLOps"
+  ],
+  "Software Development": [
+    "Python", "Node.js", "FastAPI", "PostgreSQL", "REST APIs"
+  ],
+  "Cloud / DevOps": [
+    "AWS Bedrock", "SageMaker", "EKS/Kubernetes", "Docker",
+    "OpenStack", "Ansible", "AWS Lambda", "API Gateway",
+    "CloudWatch", "RDS", "S3"
+  ]
 };
 
 const PROJECTS = [
-  { title: "IoT-Based Calorie Detection Spoon", desc: "Runner-up KMIPN IV — IoT spoon with deep learning + mobile app.", tags: ["IoT","Deep Learning","Mobile"] },
-  { title: "Planogram Compliance (Ajinomoto)", desc: "Object detection & classification using SageMaker + Bedrock.", tags: ["Computer Vision","AWS","Classification"] },
-  { title: "AI-Powered Customer Support Chatbot", desc: "Contextual chatbot with Text-to-SQL and RAG pipeline.", tags: ["Chatbot","NLP","RAG"] },
-  { title: "NusaChat (Public Gen AI Service)", desc: "GenAI ecosystem in Datacomm with image processing & DB integration.", tags: ["Generative AI","Cloud","Backend"] },
-  { title: "Freight Management System", desc: "Desktop & mobile app for logistics optimization.", tags: ["Full-stack","Logistics","Mobile"] },
-  { title: "CyberGuard", desc: "AI-driven malicious website detection system.", tags: ["Cybersecurity","ML"] }
+  // Judul lama (tetap)
+  { title: "IoT-Based Calorie Detection Spoon",
+    desc: "Perangkat sendok IoT dengan model deep learning untuk estimasi kalori, dilengkapi aplikasi pendamping. Runner-up KMIPN IV.",
+    tags: ["IoT","Deep Learning","Mobile"] },
+
+  // Judul menarik + deskripsi ringkas (AWS/OpenAI)
+  { title: "Retail Planogram Intelligence",
+    desc: "Sistem Computer Vision di AWS (SageMaker + Bedrock) untuk mendeteksi kepatuhan planogram, mengurangi kesalahan penataan rak dan meningkatkan eksekusi di toko.",
+    tags: ["Computer Vision","AWS","Retail"] },
+
+  { title: "Quality Control Automation",
+    desc: "Automasi inspeksi kualitas pada jalur manufaktur menggunakan S3, Lambda, dan SageMaker. Mendeteksi cacat secara konsisten dan mempercepat pengambilan keputusan.",
+    tags: ["Automation","AWS","Computer Vision"] },
+
+  { title: "Centralized Chatbot Platform",
+    desc: "Platform chatbot terpusat berbasis AWS dan OpenAI yang mengintegrasikan alur HR, Finance, dan IT. Mendukung RAG, kontrol akses, dan observabilitas percakapan.",
+    tags: ["Chatbot","AWS","OpenAI"] },
+
+  { title: "Generative Fashion Behavior AI",
+    desc: "Analitik preferensi dan perilaku fashion pengguna. Menggabungkan embedding, retrieval, dan generative reasoning di AWS Bedrock/OpenAI untuk rekomendasi yang kontekstual.",
+    tags: ["Generative AI","Fashion","OpenAI"] },
+
+  { title: "Insurance Claim Assistant",
+    desc: "Asisten klaim asuransi berbasis GenAI untuk membantu verifikasi dokumen dan merangkum informasi penting. Dibangun dengan Bedrock, Lambda, dan OpenAI API.",
+    tags: ["Insurance","AWS","OpenAI"] },
+
+  // Entri dari CV
+  { title: "Planogram Compliance (Ajinomoto)",
+    desc: "Pendeteksian objek dan klasifikasi kategori produk untuk audit rak. Pipeline model dan inferensi dikelola di AWS.",
+    tags: ["Computer Vision","AWS","Classification"] },
+
+  { title: "AI-Powered Customer Support Chatbot",
+    desc: "Chatbot kontekstual dengan Text-to-SQL dan RAG untuk akses data operasional secara aman.",
+    tags: ["Chatbot","NLP","RAG"] },
+
+  { title: "NusaChat (Public Gen AI Service)",
+    desc: "Layanan GenAI publik dengan pemrosesan gambar dan integrasi basis data, dirancang untuk skenario multi-tenant.",
+    tags: ["Generative AI","Cloud","Backend"] },
+
+  { title: "Freight Management System",
+    desc: "Aplikasi desktop dan mobile untuk pengelolaan logistik dengan integrasi pelacakan dan laporan operasional.",
+    tags: ["Full-stack","Logistics","Mobile"] },
+
+  { title: "CyberGuard",
+    desc: "Deteksi situs berbahaya berbasis machine learning dengan fokus pada fitur konten dan perilaku.",
+    tags: ["Cybersecurity","ML"] }
 ];
 
 function page(body, title = SITE.title) {
@@ -50,8 +109,8 @@ function page(body, title = SITE.title) {
           },
           animation: {
             floaty:"floaty 6s ease-in-out infinite",
-            fadeup:"fadeup 1s ease-out forwards",
-            bgshift:"bgshift 20s ease-in-out infinite alternate"
+            fadeup:"fadeup 0.9s ease-out forwards",
+            bgshift:"bgshift 22s ease-in-out infinite alternate"
           }
         }
       }
@@ -75,7 +134,7 @@ function page(body, title = SITE.title) {
   </main>
 
   <script>
-    // Carousel autoplay
+    // Carousel autoplay + dots
     (function(){
       const track = document.querySelector('#carousel-track');
       if(!track) return;
@@ -83,7 +142,7 @@ function page(body, title = SITE.title) {
       const dots = Array.from(document.querySelectorAll('[data-dot]'));
       let i=0,timer;
       function go(n){i=(n+slides.length)%slides.length;track.style.transform='translateX('+(-i*100)+'%)';dots.forEach((d,idx)=>d.classList.toggle('bg-accent',idx===i));}
-      function auto(){clearInterval(timer);timer=setInterval(()=>go(i+1),4000);}
+      function auto(){clearInterval(timer);timer=setInterval(()=>go(i+1),4500);}
       dots.forEach((d,idx)=>d.addEventListener('click',()=>{go(idx);auto();}));
       go(0);auto();
     })();
@@ -94,7 +153,7 @@ function page(body, title = SITE.title) {
 
 function SectionSkills(){
   const cards = Object.entries(SKILLS).map(([group, items]) => `
-    <div class="rounded-2xl border border-white/10 p-5 bg-white/5 hover:scale-105 transition">
+    <div class="rounded-2xl border border-white/10 p-5 bg-white/5 hover:border-accent/50 hover:shadow-lg transition">
       <h3 class="font-semibold text-accent">${group}</h3>
       <div class="mt-3 flex flex-wrap gap-2">
         ${items.map(t=>`<span class="text-xs px-2 py-1 rounded-full border border-white/10">${t}</span>`).join("")}
@@ -127,11 +186,41 @@ function SectionProjects(){
   `;
 }
 
+function SectionContact(){
+  return `
+    <section id="contact" class="py-16 animate-fadeup">
+      <h2 class="text-2xl font-semibold">Contact</h2>
+      <div class="mt-6 grid sm:grid-cols-3 gap-6">
+        <a href="mailto:${SITE.email}" class="group rounded-2xl border border-white/10 p-5 bg-white/5 hover:border-accent/50 transition">
+          <h3 class="font-semibold">Email</h3>
+          <p class="mt-1 text-zinc-300">${SITE.email}</p>
+          <span class="mt-3 inline-block text-xs opacity-80 group-hover:opacity-100">Send an email</span>
+        </a>
+        <a href="${SITE.github}" target="_blank" rel="noopener" class="group rounded-2xl border border-white/10 p-5 bg-white/5 hover:border-accent/50 transition">
+          <h3 class="font-semibold">GitHub</h3>
+          <p class="mt-1 text-zinc-300">${SITE.github}</p>
+          <span class="mt-3 inline-block text-xs opacity-80 group-hover:opacity-100">View repositories</span>
+        </a>
+        <a href="${SITE.linkedin}" target="_blank" rel="noopener" class="group rounded-2xl border border-white/10 p-5 bg-white/5 hover:border-accent/50 transition">
+          <h3 class="font-semibold">LinkedIn</h3>
+          <p class="mt-1 text-zinc-300">${SITE.linkedin}</p>
+          <span class="mt-3 inline-block text-xs opacity-80 group-hover:opacity-100">Connect professionally</span>
+        </a>
+      </div>
+      <p class="mt-6 text-sm text-zinc-400 max-w-2xl">
+        Terbuka untuk kolaborasi, konsultasi AI/ML, dan integrasi GenAI di lingkungan cloud.
+        Saya mengutamakan desain yang dapat dioperasikan, terukur, dan aman.
+      </p>
+    </section>
+  `;
+}
+
 function home(){
   const dots = GALLERY.map((_,idx)=>`<button aria-label="slide ${idx+1}" data-dot class="w-3 h-3 rounded-full bg-white/30"></button>`).join("");
-  const slides = GALLERY.map(src=>`
-    <div class="min-w-full">
-      <img src="${src}" alt="Gallery image" class="w-full h-72 sm:h-96 object-cover rounded-2xl"/>
+  const slides = GALLERY.map(g=>`
+    <div class="min-w-full flex flex-col items-center">
+      <img src="${g.src}" alt="Gallery image" class="w-full h-72 sm:h-96 object-cover rounded-2xl"/>
+      <p class="mt-3 text-sm text-zinc-300 italic max-w-3xl text-center px-2">${g.caption}</p>
     </div>
   `).join("");
 
@@ -139,13 +228,13 @@ function home(){
     <!-- HERO -->
     <header class="pt-16 pb-10 grid md:grid-cols-[1.2fr_.8fr] items-center gap-8 animate-fadeup">
       <div>
-        <p class="text-sm uppercase tracking-widest text-emerald-300/90">Hi, I’m Fadhil 👋</p>
+        <p class="text-sm uppercase tracking-widest text-emerald-300/90">Hi, I’m Fadhil</p>
         <h1 class="mt-2 text-4xl sm:text-6xl font-bold leading-tight">
-          An <span class="text-accent">AI/ML Engineer</span> passionate about building intelligent systems.
+          AI/ML Engineer yang fokus membangun sistem cerdas dari data hingga produksi.
         </h1>
         <p class="mt-4 max-w-3xl text-zinc-300">
-          With strong skills in Software Development and Cloud/DevOps, I bridge the gap between
-          data, algorithms, and scalable infrastructure.
+          Latar belakang Software Development dan Cloud/DevOps membantu saya menjembatani algoritma, aplikasi, dan infrastruktur
+          agar solusi AI dapat dioperasikan secara andal dan terukur.
         </p>
       </div>
       <div class="flex md:justify-end">
@@ -164,17 +253,7 @@ function home(){
 
     ${SectionSkills()}
     ${SectionProjects()}
-
-    <!-- CONTACT -->
-    <section id="contact" class="py-16 animate-fadeup">
-      <h2 class="text-2xl font-semibold">Contact</h2>
-      <div class="mt-3 text-zinc-300 space-y-1">
-        <p>Email: <a class="underline" href="mailto:${SITE.email}">${SITE.email}</a></p>
-        <p>WhatsApp: <a class="underline" href="${SITE.wa}">+62 812-2872-9513</a></p>
-        <p>GitHub: <a class="underline" href="${SITE.github}">${SITE.github}</a></p>
-        <p>LinkedIn: <a class="underline" href="${SITE.linkedin}">${SITE.linkedin}</a></p>
-      </div>
-    </section>
+    ${SectionContact()}
   `);
 }
 

@@ -1,18 +1,22 @@
-// api/index.js
+// api/index.js — Tailwind CDN + animasi minimalis
 const SITE = {
   name: "Primafadhil Sulistyo",
   email: "primafadhil.sulistyo@gmail.com",
   wa: "https://wa.me/6281228729513",
   github: "https://github.com/yourusername",
   linkedin: "https://www.linkedin.com/in/yourusername",
-  title: "Fadhil — AI/DevOps"
+  title: "Fadhil — AI/ML • Software • Cloud"
 };
 
 const projects = [
   { title: "NutriIoTSpoon", desc: "IoT spoon calorie detection (YOLO) + mobile app.", tags: ["IoT","CV","YOLO"] },
-  { title: "Planogram Compliance", desc: "Object detection & classification SKU display (Ajinomoto).", tags: ["SageMaker","Bedrock","CV"] },
+  { title: "Planogram Compliance", desc: "Object detection & SKU classification (Ajinomoto).", tags: ["SageMaker","Bedrock","CV"] },
   { title: "HR GenAI Chatbot", desc: "Text-to-SQL + RAG untuk HR analytics multi-channel.", tags: ["Bedrock","pgvector","RAG"] },
 ];
+
+const skillsAI = ["Machine Learning", "Computer Vision", "Generative AI", "Evaluation & MLOps"];
+const skillsDev = ["Node.js", "Python", "FastAPI", "PostgreSQL", "REST"];
+const skillsCloud = ["AWS Bedrock", "SageMaker", "EKS/K8s", "Docker", "CI/CD"];
 
 function page(body, title = SITE.title) {
   return `<!doctype html>
@@ -27,12 +31,22 @@ function page(body, title = SITE.title) {
       theme: {
         extend: {
           colors: { base: "#0b0f1a", panel: "#0c1324", accent: "#34d399" },
+          keyframes: {
+            floaty: { "0%,100%": { transform: "translateY(0)" }, "50%": { transform: "translateY(-6px)" } },
+            softpulse: { "0%,100%": { opacity: .6 }, "50%": { opacity: 1 } },
+            bgshift: { "0%": { backgroundPosition: "0% 0%" }, "100%": { backgroundPosition: "100% 0%" } }
+          },
+          animation: {
+            floaty: "floaty 6s ease-in-out infinite",
+            softpulse: "softpulse 3.5s ease-in-out infinite",
+            bgshift: "bgshift 18s ease-in-out infinite alternate"
+          }
         }
       }
     }
   </script>
 </head>
-<body class="min-h-screen text-zinc-100 bg-gradient-to-b from-base via-panel to-base">
+<body class="min-h-screen text-zinc-100 bg-[length:200%_100%] bg-gradient-to-b from-base via-panel to-base animate-bgshift">
   <nav class="sticky top-0 z-20 backdrop-blur bg-black/20 border-b border-white/10">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
       <a href="/" class="font-semibold">fadhil.dev</a>
@@ -51,6 +65,12 @@ function page(body, title = SITE.title) {
 </html>`;
 }
 
+function ChipList(arr){
+  return `<div class="mt-3 flex flex-wrap gap-2">
+    ${arr.map(t=>`<span class="text-xs px-2 py-1 rounded-full border border-white/10">${t}</span>`).join("")}
+  </div>`;
+}
+
 function home() {
   const cards = projects.map(p => `
     <a class="group rounded-2xl border border-white/10 hover:border-white/20 p-5 bg-white/5 transition-colors"
@@ -64,27 +84,78 @@ function home() {
   `).join("");
 
   return page(`
+    <!-- HERO -->
     <header class="pt-16 pb-10 grid md:grid-cols-[1.2fr_.8fr] items-center gap-8">
       <div>
-        <p class="text-sm uppercase tracking-widest text-emerald-300/90">Greetings!</p>
+        <!-- Opsi 1: Ringkas, Impactful -->
+        <p class="text-sm uppercase tracking-widest text-emerald-300/90">Hi, I’m Fadhil 👋</p>
         <h1 class="mt-2 text-4xl sm:text-6xl font-bold leading-tight">
-          I’m passionate about <span class="text-accent">AI & DevOps</span> — let’s dive in!
+          An <span class="text-accent">AI/ML Engineer</span> passionate about turning data into intelligence.
         </h1>
         <p class="mt-4 max-w-3xl text-zinc-300">
-          Fokus ML/LLM, Computer Vision, & AWS (Bedrock, SageMaker, EKS). End-to-end delivery dari data → model → deploy.
+          Beyond machine learning, I also craft scalable software solutions and leverage cloud & DevOps
+          to deliver end-to-end systems.
         </p>
         <div class="mt-6 flex gap-3">
           <a href="/projects" class="px-4 py-2 rounded-2xl bg-accent text-black font-semibold">Explore Projects</a>
           <a href="/contact" class="px-4 py-2 rounded-2xl border border-white/20">Contact Me</a>
         </div>
+        <div class="mt-3 h-[2px] w-40 bg-accent/60 rounded animate-softpulse"></div>
       </div>
       <div class="flex md:justify-end">
         <img src="/static/profile.png" alt="Foto ${SITE.name}"
-             class="w-40 h-40 rounded-full object-cover ring-2 ring-accent shadow-xl">
+             class="w-40 h-40 rounded-full object-cover ring-2 ring-accent shadow-xl animate-floaty">
       </div>
     </header>
 
-    <section class="py-12">
+    <!-- SKILLS -->
+    <section class="py-8">
+      <h2 class="text-2xl font-semibold">Skills</h2>
+      <div class="grid sm:grid-cols-3 gap-5 mt-4">
+        <div class="rounded-2xl border border-white/10 p-4 bg-white/5">
+          <h3 class="font-semibold">AI / ML</h3>
+          ${ChipList(skillsAI)}
+        </div>
+        <div class="rounded-2xl border border-white/10 p-4 bg-white/5">
+          <h3 class="font-semibold">Software Development</h3>
+          ${ChipList(skillsDev)}
+        </div>
+        <div class="rounded-2xl border border-white/10 p-4 bg-white/5">
+          <h3 class="font-semibold">Cloud / DevOps</h3>
+          ${ChipList(skillsCloud)}
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="py-8">
+      <h2 class="text-2xl font-semibold">Experience</h2>
+      <ol class="mt-4 space-y-4">
+        <li class="rounded-2xl border border-white/10 p-4 bg-white/5">
+          <div class="flex items-center justify-between gap-3 flex-wrap">
+            <p class="font-semibold">AI/ML Engineer — Ajinomoto (Project)</p>
+            <span class="text-xs text-zinc-400">2024–Now</span>
+          </div>
+          <ul class="list-disc pl-5 text-zinc-300 text-sm mt-2">
+            <li>Planogram CV: object detection & classification, deployment on AWS SageMaker.</li>
+            <li>End-to-end pipeline & monitoring (logs/metrics) dengan praktik MLOps.</li>
+          </ul>
+        </li>
+        <li class="rounded-2xl border border-white/10 p-4 bg-white/5">
+          <div class="flex items-center justify-between gap-3 flex-wrap">
+            <p class="font-semibold">Software & Cloud Engineer — Various</p>
+            <span class="text-xs text-zinc-400">2022–2024</span>
+          </div>
+          <ul class="list-disc pl-5 text-zinc-300 text-sm mt-2">
+            <li>Bangun layanan backend, integrasi database, dan CI/CD di AWS.</li>
+            <li>Optimasi biaya & reliability (Docker, K8s/EKS, observability).</li>
+          </ul>
+        </li>
+      </ol>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="py-10">
       <h2 class="text-2xl font-semibold">Selected Projects</h2>
       <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">${cards}</div>
     </section>
@@ -96,8 +167,12 @@ function about() {
     <section class="py-12">
       <h2 class="text-2xl font-semibold">About</h2>
       <p class="mt-3 text-zinc-300 leading-relaxed">
-        Saya cheerful & friendly; suka K-pop, gaming, dan eksplor teknologi.
-        Highlight: Planogram CV (Ajinomoto), HR GenAI Chatbot, MLOps di AWS.
+        I am an AI/ML enthusiast with a strong passion for exploring how data and algorithms create meaningful impact.
+        My main focus is on Machine Learning, Computer Vision, and Generative AI—designing and deploying intelligent systems.
+      </p>
+      <p class="mt-3 text-zinc-300 leading-relaxed">
+        In addition to AI/ML expertise, I have solid experience in Software Development and Cloud Computing (DevOps).
+        This combination lets me build models, engineer scalable applications, and deploy them seamlessly in the cloud.
       </p>
     </section>
   `, "About — " + SITE.title);

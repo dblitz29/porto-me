@@ -13,12 +13,12 @@ const GALLERY = [
     caption: "Achieved 1st Runner-up at KMIPN IV National Competition in Batam. Developed an innovative calorie-detection spoon using computer vision and deep learning, integrated with a companion mobile application for real-time nutritional tracking."
   },
   {
-    src: "/static/gallery/aws-event.jpg",
+    src: "/static/gallery/aws.jpg",
     title: "AWS Generative AI Speaker",
     caption: "Invited as a key speaker at AWS Generative AI event in Surabaya 2025. Shared insights on end-to-end GenAI implementation patterns and best practices for deploying AI solutions on AWS infrastructure."
   },
   {
-    src: "/static/gallery/datacenter.jpg",
+    src: "",
     title: "Datacenter Infrastructure",
     caption: "Contributed to datacenter racking and server setup operations at Datacomm. Gained hands-on experience in enterprise infrastructure deployment and production environment readiness."
   }

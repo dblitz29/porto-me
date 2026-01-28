@@ -419,7 +419,7 @@ function Hero() {
           </span>
         </h1>
         <p class="text-2xl text-slate-300 font-light leading-relaxed">
-          AI/ML Software Developer
+          AI/ML Software Engineer
         </p>
         <p class="text-lg text-slate-400 leading-relaxed max-w-xl">
           I specialize in building intelligent systems that bridge the gap between cutting-edge AI research and production-ready applications. 
